@@ -15,8 +15,13 @@ class AI(BaseAI):
 
   CLAW, ARCHER, REPAIRER, HACKER, TURRET, WALL, TERMINATOR, HANGAR = range(8)
 
-  def spawn(self):
+  def spawn_units(self):
     self.players[self.playerID].orbitalDrop(0,0, random.randint(0,7))
+
+  def move_units(self):
+    for droid in self.droids:
+      droid.move(droid.x+1, droid.y)
+      print "Droid moved to (%s, %s)" % (droid.x, droid.y)
 
   def init(self):
     pass
