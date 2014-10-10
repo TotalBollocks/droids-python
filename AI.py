@@ -2,6 +2,7 @@
 from BaseAI import BaseAI
 from GameObject import *
 import random
+from cache import cache
 
 class AI(BaseAI):
   """The class implementing gameplay logic."""
@@ -29,18 +30,60 @@ class AI(BaseAI):
     return
 
   def move_units(self):
+    kill_this = self.find_enemy_hangar()
+
+    for droid in self.droids:
+      if droid.owner == self.playerID:
+        self.move_to(droid, droid.x, droid.y)
+
+
+  def move_right(self, droid):
+    droid.move(droid.x + 1, droid.y)
+
+  def move_left(self, droid):
+    droid.move(droid.x -1, droid.y)
+
+  def move_up(self, droid):
+    droid.move(droid.x, droid.y -1)
+
+  def move_down(self, droid):
+    droid.move(droid.x, droid.y +1)
+
+  def move_to(self, droid, x, y):
     directions = [(1,0), (-1,0), (0,1), (0,-1)]
 
-    
-    for droid in self.droids:
-      for i in range(10):
-        movement = random.choice(directions)
-        droid.move(droid.x + movement[0], droid.y + movement[1])
+    for _ in range(droid.maxMovement):
+      if droid.x < x:
+        move_right(droid)
+      elif droid.x > x:
+        move_left(droid)
+      elif droid.y < y:
+        move_down(droid)
+      elif droid.y > y:
+        move_up(droid)
+      else:
+        droid.operate(x, y)
 
-    return
+
+    movement = random.choice(directions)
+    new_x, new_y = droid.x + movement[0], droid.y + movement[1]
+
+    for _ in range(droids.maxMovement):
+      droid.move(droid.x + movement[0], droid.y + movement[1])
+      if self.Cache.my_droids[new_x][new_y] == None:
+        if self.Cache.enemy_droids[new_x][new_y] == None:
+          # Move
+
+  def find_enemy_hangar(self):
+    for droid in self.droids:
+      if droid.playerID != self.playerID^1 and droid.variant == self.HANGAR:
+        return droid
+    return None
+
 
   ##This function is called once, before your first turn
   def init(self):
+    self.Cache = cache
     pass
 
   ##This function is called once, after your last turn
