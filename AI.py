@@ -68,17 +68,18 @@ class AI(BaseAI):
     movement = random.choice(directions)
     new_x, new_y = droid.x + movement[0], droid.y + movement[1]
 
-    for _ in range(droids.maxMovement):
+    for _ in range(droid.maxMovement):
       droid.move(droid.x + movement[0], droid.y + movement[1])
       if self.Cache.my_droids[new_x][new_y] == None:
         if self.Cache.enemy_droids[new_x][new_y] == None:
           # Move
+          pass
 
   def find_enemy_hangar(self):
     for droid in self.droids:
-      if droid.playerID != self.playerID^1 and droid.variant == self.HANGAR:
+      if droid.owner != self.playerID^1 and droid.variant == self.HANGAR:
         return droid
-  return None
+    return None
 
 
   ##This function is called once, before your first turn
