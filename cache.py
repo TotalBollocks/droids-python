@@ -11,14 +11,9 @@ class cache:
     self.clean_droids()
     
   def clean_droids(self):
-    grid = []
-    for i in self.ai.mapWidth:
-      grid.push([])
-      for x in grid[i]:
-        x.push([])
-    self.my_droids = grid
-    self.enemy_droids = grid
-    self.enemy_hangars = grid
+    self.my_droids = [[None for x in xrange(self.ai.mapWidth)] for x in xrange(self.ai.mapHeight)]
+    self.enemy_droids = [[None for x in xrange(self.ai.mapWidth)] for x in xrange(self.ai.mapHeight)]
+    self.enemy_hangars = [[None for x in xrange(self.ai.mapWidth)] for x in xrange(self.ai.mapHeight)]
 
 
   def update_droids(self):
