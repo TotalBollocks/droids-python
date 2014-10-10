@@ -29,12 +29,13 @@ class AI(BaseAI):
     return
 
   def move_units(self):
-    if self.playerID == 0:
-      for droid in self.droids:
-        droid.move( droid.x +1 , droid.y)
-    elif self.playerID == 1:
-      for droid in self.droids:
-        droid.move( droid.x -1 , droid.y)
+    directions = [(1,0), (-1,0), (0,1), (0,-1)]
+
+    
+    for droid in self.droids
+      for i in range(10):
+        movement = random.choice(directions)
+        droid.move(droid.x + movement[0], droid.y + movement[1])
 
     return
 
