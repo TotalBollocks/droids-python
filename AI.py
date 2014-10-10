@@ -74,10 +74,10 @@ class AI(BaseAI):
         if self.Cache.enemy_droids[new_x][new_y] == None:
           # Move
 
-  def find_enemy_hangar(self):
-    for droid in self.droids:
-      if droid.playerID != self.playerID^1 and droid.variant == self.HANGAR:
-        return droid
+    def find_enemy_hangar(self):
+      for droid in self.droids:
+        if droid.playerID != self.playerID^1 and droid.variant == self.HANGAR:
+          return droid
     return None
 
 
