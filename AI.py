@@ -32,7 +32,7 @@ class AI(BaseAI):
     directions = [(1,0), (-1,0), (0,1), (0,-1)]
 
     
-    for droid in self.droids
+    for droid in self.droids:
       for i in range(10):
         movement = random.choice(directions)
         droid.move(droid.x + movement[0], droid.y + movement[1])
